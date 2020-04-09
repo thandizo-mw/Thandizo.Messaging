@@ -39,11 +39,10 @@ namespace Thandizo.Messaging.Email
                 }
             }
 
-
+            // Only send email if they are actual recipients
             if (hasRecipient)
             {
                 await _client.SendAsync(emailMessage);
-               
             }
             return result;
             
