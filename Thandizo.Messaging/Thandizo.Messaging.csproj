@@ -7,11 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Email\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AngleDimension.Standard.Http" Version="1.1.6.4" />
+    <PackageReference Include="SocketLabs.EmailDelivery" Version="1.0.0.4" />
     <PackageReference Include="Thandizo.DataModels" Version="1.0.1.7" />
   </ItemGroup>
 
