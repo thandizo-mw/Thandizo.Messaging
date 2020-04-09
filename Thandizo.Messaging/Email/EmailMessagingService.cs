@@ -43,7 +43,12 @@ namespace Thandizo.Messaging.Email
             if (hasRecipient)
             {
                 await _client.SendAsync(emailMessage);
+                result.Message = "Email sent successfully";
             }
+            else
+            {
+                result.Message = "No emails could be found";
+            } 
             return result;
             
         }
