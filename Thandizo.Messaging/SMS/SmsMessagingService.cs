@@ -1,21 +1,21 @@
 ﻿using AngleDimension.Standard.Http.HttpServices;
-using System;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Thandizo.DataModels.General;
 using Thandizo.DataModels.Messaging;
+using Thandizo.DataModels.SMS;
 using Thandizo.Messaging.Core;
 
 namespace Thandizo.Messaging.SMS
 {
     public class SmsMessagingService : IMessagingService
     {
-        private readonly string _baseUrl;
-        private readonly string _sender;
+        private readonly SmsConfiguration _smsConfiguration;
 
-        public SmsMessagingService(string baseUrl, string sender)
+        public SmsMessagingService(SmsConfiguration smsConfiguration)
         {
-            _baseUrl = baseUrl;
-            _sender = sender;
+            _smsConfiguration = smsConfiguration;
         }
 
         public async Task<OutputResponse> SendMessage(MessageModel message)
@@ -27,18 +27,15 @@ namespace Thandizo.Messaging.SMS
 
             if (message != null)
             {
-                var gatewayMessage = new GatewayMessage
-                {
-                    Message = message.MessageBody,
-                    Recipients = message.DestinationRecipients,
-                    Sender = _sender,
-                    Source = message.SourceAddress,
-                    TransactionReference = Guid.NewGuid().ToString()
-                };
+                var url = string.Format("{0}?username={1}&password={2}&to={3}&smsc={4}&from={5}&text={6}",
+                    _smsConfiguration.BaseUrl, _smsConfiguration.RapidProUserName,
+                    _smsConfiguration.RapidProPassword, message.DestinationRecipients.FirstOrDefault(),
+                   _smsConfiguration.RapidProSmsCode, _smsConfiguration.SmsSender,
+                   message.MessageBody);
 
-                var response = await HttpRequestFactory.Post($"{_baseUrl}/api/Messages/SendMessageRapid", gatewayMessage);
+                var response = await HttpRequestFactory.Get(url);
 
-                if (response.IsSuccessStatusCode)
+                if (response.StatusCode == HttpStatusCode.Accepted)
                 {
                     result.Message = "Message Queued for delivery";
                 }
