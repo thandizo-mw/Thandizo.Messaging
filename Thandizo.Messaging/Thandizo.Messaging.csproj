@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="AngleDimension.Standard.Http" Version="1.1.7.4" />
     <PackageReference Include="SocketLabs.EmailDelivery" Version="1.0.0.4" />
-    <PackageReference Include="Thandizo.DataModels" Version="1.0.8.7" />
+    <PackageReference Include="Thandizo.DataModels" Version="1.0.8.9" />
   </ItemGroup>
 
 </Project>
