@@ -2,14 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Version>1.0.0.4</Version>
+    <Version>1.0.0.5</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AngleDimension.Standard.Http" Version="1.1.7.4" />
+    <PackageReference Include="AngleDimension.Standard.Http" Version="1.1.7.5" />
     <PackageReference Include="SocketLabs.EmailDelivery" Version="1.0.0.4" />
-    <PackageReference Include="Thandizo.DataModels" Version="1.0.8.9" />
+    <PackageReference Include="Thandizo.DataModels" Version="1.0.9.7" />
   </ItemGroup>
 
 </Project>
